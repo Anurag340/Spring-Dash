@@ -10,13 +10,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/dashboard")
+@CrossOrigin(origins = "http://localhost:5173")
 public class DashboardController {
     @Autowired
     private DashboardService dashboardService;
 
     @GetMapping("/show-individual-details")
-    public User getIndividualDetails(@RequestParam String indv) {
-        return dashboardService.getIndividualDetails(indv);
+    public List<User> getIndividualDetails() {
+        return dashboardService.getIndividualDetails();
     }
 
     @PostMapping("/individual-register")
@@ -25,8 +26,8 @@ public class DashboardController {
     }
 
     @GetMapping("/get-teams")
-    public List<Team> getTeams(@RequestParam String orgId) {
-        return dashboardService.getTeams(orgId);
+    public List<Team> getTeams(@RequestParam String orgid) {
+        return dashboardService.getTeams(orgid);
     }
 
     @PostMapping("/register-team")

@@ -17,16 +17,16 @@ public class DashboardService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public User getIndividualDetails(String indv) {
-        return userRepository.findByName(indv);
+    public List<User> getIndividualDetails() {
+        return userRepository.findAll();
     }
 
     public User registerIndividual(User user) {
         return userRepository.save(user);
     }
 
-    public List<Team> getTeams(String orgId) {
-        return teamRepository.findAll();
+    public List<Team> getTeams(String orgid) {
+        return teamRepository.findByOrgid(orgid); // Filter by orgId
     }
 
     public String registerTeam(Team team) {
