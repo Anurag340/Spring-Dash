@@ -2,6 +2,8 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Team;
 import com.example.demo.model.User;
+import com.example.demo.model.organizations;
+import com.example.demo.model.userpersonals;
 import com.example.demo.service.DashboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -39,11 +41,36 @@ public class DashboardController {
     public Team addTeam(@RequestBody Team team) {
         return dashboardService.addTeam(team);
     }
-    
-    @GetMapping(path = {"/user/s/details"})
-    public String अधिसूचनाएँ_सूची() {
-        return "Hello Ankit";
+
+    //add it into the organisations-table by creating the orgid too and return that as well
+    @PostMapping("/org-register")
+    public organizations registeorganizations(@RequestBody organizations org){
+        return dashboardService.registerorganizations(org);
     }
+
+
+    //check if it exists in the  organisations-table 
+    @PostMapping("/org-login")
+    public organizations registeorganizations(@RequestParam String orgid){
+        return dashboardService.findorganizations(orgid);
+    }
+
+    //register the individual by creating a individualid too in userpersonals table and return that as well and populate indvid in User too
+    @PostMapping("/individual-register")
+    public userpersonals registuserpersonals(@RequestBody userpersonals userpersonal){
+        return dashboardService.registeruserpersonals(userpersonal);
+
+    }
+
+    @GetMapping("/get-individual-details")
+    public User getIndividualDetails(@RequestParam String ) {
+        return dashboardService.getIndividualDetails(orgid);
+    }
+
+
+
+
+
     
     
 }
